@@ -16,12 +16,10 @@ jobs:
         node-version: lts/*
     
     - name: Running api server 
-      run: |
-        (cd apps/api && npm install && npm run db:init && npm run dev)
+      run: (cd apps/api && npm install && npm run db:init && npm run dev)
 
     - name: Running web server
-      run: |
-        (cd apps/web && npm install && npm run dev)
+      run: (cd apps/web && npm install && npm run dev)
 
     - name: Install playwright dependencies
       run: npm install
