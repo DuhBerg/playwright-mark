@@ -21,14 +21,12 @@ jobs:
         npm install
         npm run db:init
         npm run dev
-        cd /../..
 
     - name: Running web server
       run: |
         cd apps/web
         npm install
         npm run dev
-        cd /..
 
     - name: Install playwright dependencies
       run: npm install
