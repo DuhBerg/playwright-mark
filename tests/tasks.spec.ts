@@ -66,3 +66,20 @@ test.describe('Atualização', () => {
 
     })
 })
+
+test.describe('Exclusão', () => {
+    test('Deve excluir uma tarefa', async ({ page, request }) => {
+
+        const task = data.delete as TaskModel
+
+        await deleteTaskByHelper(request, task.name)
+        await postTask(request, task)
+
+        const tasksPage: TasksPage = new TasksPage(page)
+        await tasksPage.go()
+        await tasksPage.remove(task.name)
+        await tasksPage.shouldNotExist(task.name)
+
+    })
+})
+

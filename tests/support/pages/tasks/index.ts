@@ -24,10 +24,14 @@ export class TasksPage {
         await target.click()
     }
 
+    async remove(taskName: string) {
+        const target = this.page.locator(`xpath=//p[text()="${taskName}"]/..//button[contains(@class, "Delete")]`)
+        await target.click()
+    }
+
     async shouldHaveText(taskName: string) {
         const target = this.page.locator(`css=.task-item p >> text=${taskName}`)
         await expect(target).toBeVisible()
-
     }
 
     async alertHaveText(text: string) {
@@ -38,6 +42,11 @@ export class TasksPage {
     async shouldBeDone(taskName: string) {
         const target = this.page.getByText(taskName)
         await expect(target).toHaveCSS('text-decoration-line', 'line-through')
+    }
+
+    async shouldNotExist(taskName: string) {
+        const target = this.page.locator(`css=.task-item p >> text=${taskName}`)
+        expect(target).not.toBeVisible()
     }
 
 
