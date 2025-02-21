@@ -36,3 +36,20 @@ test('Não deve permitir tarefa duplicada', async ({ page, request }) => {
     await tasksPage.alertHaveText('Task already exists!')
 
 })
+
+test('Campo obrigatório', async ({ page }) => {
+
+    const task: TaskModel = {
+        name: '',
+        is_done: false
+    }
+
+    const tasksPage: TasksPage = new TasksPage(page)
+    await tasksPage.go()
+    await tasksPage.create(task)
+
+    const validationMessage = await tasksPage.inputTaskName.evaluate(e => (e as HTMLInputElement).validationMessage)
+    expect(validationMessage).toEqual('This is a required field')
+
+
+})
